@@ -24,3 +24,4 @@
 
 */5    22-23,0-6   *   *   *     bash ~/src/sleepberry/check_and_record.sh
 07     *           *   *   *     bash ~/src/sleepberry/consolidate_sleep_hourly.sh
+20     6           *   *   *     bash ~/src/sleepberry/consolidate_sleep_end.sh
