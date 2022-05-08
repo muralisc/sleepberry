@@ -26,8 +26,11 @@ echo "Created $CONSOLIDATED_HOURLY" >> $LOG_FILE
 echo "Delting previous hour files starting with $PREV_HOUR" >> $LOG_FILE
 find /tmp -maxdepth 1 -ipath "*sleep-monitor_${PREV_HOUR}*mp3" -delete
 
-SLEEP_SPECTOGRAM="/tmp/sleep-spectogram_$PREV_HOUR.png"
-sox $CONSOLIDATED_HOURLY -n spectrogram -z100 -o $SLEEP_SPECTOGRAM -t $PREV_HOUR
+SLEEP_SPECTOGRAM_H="/tmp/sleep-spectogram_$PREV_HOUR.png"
+sox $CONSOLIDATED_HOURLY -n spectrogram -z100 -o $SLEEP_SPECTOGRAM_H -t $PREV_HOUR
 
-mv $SLEEP_SPECTOGRAM ~/shared_folders/transfer/
-mv $CONSOLIDATED_HOURLY ~/shared_folders/transfer/
+SLEEP_WAVEFORM_H="/tmp/sleep-waveform_$PREV_HOUR.png"
+convert /tmp/sleep-spectogram_${PREV_HOUR}* +append $SLEEP_SPECTOGRAM_H
+convert /tmp/sleep-waveform_${PREV_HOUR}* +append $SLEEP_WAVEFORM_H
+# rm /tmp/sleep-spectogram_${PREV_HOUR}*
+# rm /tmp/sleep-waveform_${PREV_HOUR}*
